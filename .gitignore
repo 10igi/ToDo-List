@@ -1,0 +1,9 @@
+# Database
+*.db
+*.db-journal
+*.sqlite
+
+# Build outputs
+bin/
+obj/
+.vs/
