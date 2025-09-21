@@ -13,6 +13,6 @@ namespace ToDoList.Backend
         public int TaskId { get; set; }
 
         //Navigation
-        public List Task { get; set; }
+        public Task Task { get; set; }
     }
 }

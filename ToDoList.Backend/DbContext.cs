@@ -23,25 +23,43 @@ namespace ToDoList.Backend
                 .WithOne(t => t.List)
                 .HasForeignKey(t => t.ListId);
 
-            //modelBuilder.Entity<TaskTag>()
-            //    .HasKey(tt => new { tt.TaskId, tt.TagId });
+            modelBuilder.Entity<Task>()
+                .HasOne(l => l.List)
+                .WithMany(t => t.Tasks)
+                .HasForeignKey(l => l.ListId);
+
 
             modelBuilder.Entity<Task>()
-                .HasOne(l => l.List);
-                //.WithMany(s => s.Subtasks)
-                //.HasForeignKey(s => s.TaskId)
-                //.WithMany(tt => tt.TaskTag)
-                //.HasForeignKey(tt => tt.TaskId);
+                .HasMany(st => st.Subtasks)
+                .WithOne(t => t.Task)
+                .HasForeignKey(st => st.TaskId);
 
-            //modelBuilder.Entity<Tag>()
-            //    .HasMany(tg => tg.Tag)
-            //    .WithMany(tt => tt.TaskTag)
-            //    .HasForeignKey(tt => tt.TagId);
+            modelBuilder.Entity<Subtask>()
+                .HasOne(t => t.Task)
+                .WithMany(st => st.Subtasks)
+                .HasForeignKey(st => st.TaskId);
 
-            //modelBuilder.Entity<Subtask>()
-            //    .HasOne(s => s.Task)
-            //    .WithMany(t => t.Subtasks)
-            //    .HasForeignKey(s => s.TaskId);
+
+            modelBuilder.Entity<Task>()
+                .HasMany(tt => tt.TaskTags)
+                .WithMany(t => t.Task)
+                .HasForeignKey(tt => tt.TaskId);
+
+            modelBuilder.Entity<TaskTag>()
+                .HasMany(t => t.Task)
+                .WithMany(tt => tt.TaskTag)
+                .HasForeignKey(tt => tt.TaskId);
+
+
+            modelBuilder.Entity<Tag>()
+                .HasMany(tg => tg.Tags)
+                .WithMany(tt => tt.TaskTags)
+                .HasForeignKey(tt => tt.TagId);
+
+            modelBuilder.Entity<TaskTag>()
+                 .HasMany(t => t.Tag)
+                 .WithMany(tt => tt.TaskTag)
+                 .HasForeignKey(tt => tt.TagId);
         }
     }
 }

@@ -14,8 +14,8 @@ namespace ToDoList.Backend
         public int TagId { get; set; }
 
         //Navigation
-        public List<TaskTag> TaskTags { get; set; }
-        public List<Tag> Tags { get; set; }
+        public ICollection<TaskTag> TaskTags { get; } = new List<TaskTag>();
+        public ICollection<Tag> Tags { get; } = new List<Tag>();
 
         public List List { get; set; }
 
