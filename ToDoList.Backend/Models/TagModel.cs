@@ -6,5 +6,6 @@ public class Tag
 	public string Name { get; set; }
 
     //Navigation
-    public virtual Task Task { get; set; }
+    public List<TaskTag> TaskTags { get; set; }
+    public List<Task> Task { get; set; }
 }

@@ -10,6 +10,6 @@ public class Subtask
 	//ForeignKey
 	public int TaskId { get; set; }
 
-	//Navigation
-    public virtual Task Task { get; set; }
+    //Navigation
+    public List Task { get; set; }
 }

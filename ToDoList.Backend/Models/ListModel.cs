@@ -7,5 +7,5 @@ public class List
 	public string Description { get; set; }
 
     //Navigation
-    public virtual ICollection<Task> Task { get; set; }
+    public ICollection<Task> Tasks { get; } = new List<Task>();
 }

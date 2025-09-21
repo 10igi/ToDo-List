@@ -12,6 +12,10 @@ public class Task
 	public int TagId { get; set; }
 
     //Navigation
-    public virtual ICollection<Subtask> Subtask{ get; set; }
-    public virtual List List { get; set; }
+    public List<TaskTag> TaskTags { get; set; }
+    public List<Tag> Tags { get; set; }
+
+	public List List { get; set; }
+
+	public ICollection<Subtask> Subtasks { get; } = new List<Subtask>();
 }

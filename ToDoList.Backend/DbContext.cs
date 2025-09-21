@@ -4,21 +4,21 @@ namespace ToDoList.Backend
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
-        public DbSet<Order> Orders { get; set; }
+        //Tables
+        public DbSet<Task> Tasks { get; set; }
+        public DbSet<Subtask> Subtasks { get; set; }
+        public DbSet<TaskTag> TaskTags { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<List> Lists { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=localhost;Database=TestDB;Trusted_Connection=True;");
+            optionsBuilder.UseSqlite("Filename=Mobile.db");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Конфигурация связей и ограничений
-            modelBuilder.Entity<User>()
-                .HasMany(u => u.Orders)
-                .WithOne(o => o.User)
-                .HasForeignKey(o => o.UserId);
+            
         }
     }
 }
