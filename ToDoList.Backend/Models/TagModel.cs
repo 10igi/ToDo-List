@@ -8,7 +8,6 @@ namespace ToDoList.Backend
         public string Name { get; set; }
 
         //Navigation
-        public ICollection<Task> Tasks { get; } = new List<Task>();
         public ICollection<TaskTag> TaskTags { get; } = new List<TaskTag>();
     }
 } 

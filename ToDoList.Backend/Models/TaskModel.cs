@@ -15,10 +15,7 @@ namespace ToDoList.Backend
 
         //Navigation
         public ICollection<TaskTag> TaskTags { get; } = new List<TaskTag>();
-        public ICollection<Tag> Tags { get; } = new List<Tag>();
-
         public List List { get; set; }
-
         public ICollection<Subtask> Subtasks { get; } = new List<Subtask>();
     }
 }

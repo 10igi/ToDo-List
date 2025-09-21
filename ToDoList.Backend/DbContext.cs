@@ -18,6 +18,7 @@ namespace ToDoList.Backend
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            #region List-Task
             modelBuilder.Entity<List>()
                 .HasMany(l => l.Tasks)
                 .WithOne(t => t.List)
@@ -27,8 +28,9 @@ namespace ToDoList.Backend
                 .HasOne(l => l.List)
                 .WithMany(t => t.Tasks)
                 .HasForeignKey(l => l.ListId);
+            #endregion
 
-
+            #region Task-Subtask
             modelBuilder.Entity<Task>()
                 .HasMany(st => st.Subtasks)
                 .WithOne(t => t.Task)
@@ -38,28 +40,36 @@ namespace ToDoList.Backend
                 .HasOne(t => t.Task)
                 .WithMany(st => st.Subtasks)
                 .HasForeignKey(st => st.TaskId);
+            #endregion
 
+            #region Task-TaskTags-Tags
+            modelBuilder.Entity<TaskTag>()
+            .HasKey(tt => new { tt.TaskId, tt.TagId });
 
-            modelBuilder.Entity<Task>()
-                .HasMany(tt => tt.TaskTags)
-                .WithMany(t => t.Task)
-                .HasForeignKey(tt => tt.TaskId);
+            #region Task-TaskTags
+            //modelBuilder.Entity<Task>()
+            //    .HasMany(tt => tt.TaskTags)
+            //    .WithMany(t => t.Tasks)
+            //    .HasForeignKey(tt => tt.TaskId);
 
             modelBuilder.Entity<TaskTag>()
-                .HasMany(t => t.Task)
-                .WithMany(tt => tt.TaskTag)
-                .HasForeignKey(tt => tt.TaskId);
-
-
-            modelBuilder.Entity<Tag>()
-                .HasMany(tg => tg.Tags)
+                .HasOne(t => t.Task)
                 .WithMany(tt => tt.TaskTags)
-                .HasForeignKey(tt => tt.TagId);
+                .HasForeignKey(tt => tt.TaskId);
+            #endregion
+
+            #region Tag-TaskTag
+            //modelBuilder.Entity<Tag>()
+            //    .HasMany(tg => tg.Tag)
+            //    .WithMany(tt => tt.TaskTags)
+            //    .HasForeignKey(tt => tt.TagId);
 
             modelBuilder.Entity<TaskTag>()
-                 .HasMany(t => t.Tag)
-                 .WithMany(tt => tt.TaskTag)
+                 .HasOne(t => t.Tag)
+                 .WithMany(tt => tt.TaskTags)
                  .HasForeignKey(tt => tt.TagId);
+            #endregion
+            #endregion
         }
     }
 }
