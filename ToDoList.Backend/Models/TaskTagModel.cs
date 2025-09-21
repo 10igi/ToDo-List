@@ -1,12 +1,15 @@
 ﻿using System;
 
-public class TaskTag
+namespace ToDoList.Backend
 {
-    //ForeignKeys
-    public int TaskId { get; set; }
-    public int TagId { get; set; }
+    public class TaskTag
+    {
+        //ForeignKeys
+        public int TaskId { get; set; }
+        public int TagId { get; set; }
 
-    //Navigation
-    public Tag Tag { get; set; }
-    public Task Task { get; set; }
+        //Navigation
+        public Tag Tag { get; set; }
+        public Task Task { get; set; }
+    }
 }
